@@ -6,8 +6,6 @@
 
 
 
-
-
 //This is the main Class, it handles all "Globals"
 //GameState, window messages rendering and manages all subsequent classes
 
