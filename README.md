@@ -1,4 +1,4 @@
-SFML_Shooter
-============
+2D_Top_Down_Shooter - Get a better name
+===================
 
-Top Down 2D Shooter in SFML
+Asset Download Link Here!
