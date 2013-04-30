@@ -44,10 +44,10 @@ Menu::~Menu()
 	//ALL THE THINGS
 }
 
-void Menu::AddMenuItem(char * Text, Types ItemType)
+void Menu::AddMenuItem(char * Text, Types Type)
 {
 	this->Items[ItemCount] = new Item;					//Init
-	this->Items[ItemCount]->ItemType = Types::STATIC_TEXT;	//Set Type
+	this->Items[ItemCount]->Type = Type;	//Set Type
 	this->Items[ItemCount]->Text = Text;				//Set Text;
 
 	ItemCount++;	//Increment the item count to keep track
@@ -74,10 +74,28 @@ void Menu::DrawMenu()
 	for(int CurrentItem = 0; CurrentItem < this->ItemCount; CurrentItem++)
 	{
 
-		//Ignoring Types for now, just drawing text
+		//switch through types and set specific color
 
-		//TODO!
-		//Learn how to use sfml and draw colored text....
+		switch(this->Items[CurrentItem]->Type)
+		{
+		case Types::STATIC_TEXT:
+			Text.setColor(sf::Color(150, 150, 150)); //Gray
+			break;
+
+		case Types::OPTION:
+			Text.setColor(sf::Color::White);
+			break;
+
+		case Types::FOLDER:
+			Text.setColor(sf::Color::Blue);
+			break;
+
+		default:
+			break;
+
+		}
+
+		//Check colision on text object at some point
 
 		Text.setString(sf::String(this->Items[CurrentItem]->Text));
 		Text.setPosition(100, 350 + (CurrentItem * 50));

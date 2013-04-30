@@ -18,6 +18,7 @@ namespace Game {
 	enum GameStates
 	{
 		MAIN_MENU,
+		OPTIONS_MENU,
 		IN_GAME,
 		PAUSED
 	};

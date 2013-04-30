@@ -13,7 +13,7 @@ enum Types					//Menu item Types
 
 struct Item
 {
-	Types ItemType;				//Item Type
+	Types Type;				//Item Type
 	char * Text;				//Item Text
 };
 
@@ -27,7 +27,7 @@ public:
 	Menu(char * Title, char * Font, sf::RenderWindow * RenderWindow);					//Initialize the font and all variables
 	~Menu();
 
-	void AddMenuItem(char * Text, Types ItemType);
+	void AddMenuItem(char * Text, Types Type);
 
 	void DrawMenu();
 

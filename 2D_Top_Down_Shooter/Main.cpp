@@ -12,6 +12,15 @@ void ObjectUpdateThread()
 		Ticks.restart();
 
 
+		//Menu controller if were in the main menu
+
+		if(Game::CurGameState == Game::GameStates::MAIN_MENU)
+		{
+
+			PredefinedMenus::MainMenuController(Game::MainMenu);
+
+		}
+
 
 		
 		do{			// We only want 60 updates every second
@@ -43,8 +52,13 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
 
         Game::MainWindow->clear();		//Clear the frame buffer
 
-		//Draw to the window buffer here
-		Game::MainMenu->DrawMenu();
+		if(Game::CurGameState == Game::GameStates::MAIN_MENU)
+		{
+
+			//Draw to the window buffer here
+			Game::MainMenu->DrawMenu();
+
+		}
 
 
         Game::MainWindow->display();	//Draw the buffer to the screen
