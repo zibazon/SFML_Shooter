@@ -5,15 +5,30 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{bbc8d59c-f1b9-4a8e-aca7-b844fab054d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menus\Predefined Menus">
+      <UniqueIdentifier>{84a86d57-fd0f-4a0d-a849-bd921272a54e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuControllers.h">
+      <Filter>Menus\Predefined Menus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,5 +4,5 @@
 Asset Download Link Here!
 
 
-Get SFML 2.0 RC -
+Get SFML 2.0 -
 http://www.sfml-dev.org/
