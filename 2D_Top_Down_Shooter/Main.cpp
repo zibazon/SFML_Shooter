@@ -17,7 +17,7 @@ void ObjectUpdateThread()
 		if(Game::CurGameState == Game::GameStates::MAIN_MENU)
 		{
 
-			PredefinedMenus::MainMenuController(Game::MainMenu);
+			Game::MainMenu->MenuController();
 
 		}
 

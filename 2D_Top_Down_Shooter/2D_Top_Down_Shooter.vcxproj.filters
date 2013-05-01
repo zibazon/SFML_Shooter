@@ -8,8 +8,8 @@
     <Filter Include="Menus">
       <UniqueIdentifier>{bbc8d59c-f1b9-4a8e-aca7-b844fab054d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menus\Predefined Menus">
-      <UniqueIdentifier>{84a86d57-fd0f-4a0d-a849-bd921272a54e}</UniqueIdentifier>
+    <Filter Include="TilingEngine">
+      <UniqueIdentifier>{292fe9bb-068c-4482-bc53-b8ce54f1aa07}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,6 +19,9 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Menus</Filter>
     </ClCompile>
+    <ClCompile Include="Tiling.cpp">
+      <Filter>TilingEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -27,8 +30,8 @@
     <ClInclude Include="Menu.h">
       <Filter>Menus</Filter>
     </ClInclude>
-    <ClInclude Include="MenuControllers.h">
-      <Filter>Menus\Predefined Menus</Filter>
+    <ClInclude Include="Tiling.h">
+      <Filter>TilingEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

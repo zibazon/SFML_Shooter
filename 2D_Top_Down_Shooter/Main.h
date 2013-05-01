@@ -5,7 +5,6 @@
 #include <SFML\Graphics.hpp>
 
 #include "Menu.h"
-#include "MenuControllers.h" //Contains Predefined Menus
 
 
 //This is the main namespace, it handles all "Globals"
@@ -41,8 +40,7 @@ namespace Game {
 		//Initialize our render window
 		MainWindow = new sf::RenderWindow(sf::VideoMode(1280, 720), "Game");
 
-		MainMenu = new Menu("Menu Title", "Arial.ttf", MainWindow);
-		PredefinedMenus::MainMenuSetup(MainMenu);
+		MainMenu = new Menu_Main("Menu Title", "Arial.ttf", MainWindow);
 
 	}
 

@@ -1,14 +1,18 @@
-﻿Build started 4/30/2013 2:04:45 PM.
+﻿Build started 4/30/2013 10:30:35 PM.
      1>Project "C:\Users\Sean\Documents\GitHub\SFML_Shooter\2D_Top_Down_Shooter\2D_Top_Down_Shooter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\2D_Top_Down_Shooter.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Sean\Documents\Visual Studio 2010\SFML-2.0_x86\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Menu.cpp
          Menu.cpp
-     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(81): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
-     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(85): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
-     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(89): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
-     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(101): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(83): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(87): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(91): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(103): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(107): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(164): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(165): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\menu.cpp(166): warning C4482: nonstandard extension used: enum 'Types' used in qualified name
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\Game.exe" /NOLOGO /LIBPATH:"C:\Users\Sean\Documents\Visual Studio 2010\SFML-2.0_x86\lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" "sfml-graphics-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Game.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\Game.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\Game.lib" /MACHINE:X86 Debug\Main.obj
          Debug\Menu.obj
@@ -16,10 +20,12 @@
      1>sfml-window-s-d.lib(GlContext.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(GlContext.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(GlResource.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(GlResource.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(JoystickManager.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(JoystickManager.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
+     1>sfml-window-s-d.lib(Mouse.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(Mouse.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(VideoMode.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(VideoMode.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(Window.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(Window.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(WindowImpl.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(WindowImpl.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(WglContext.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(WglContext.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
+     1>sfml-window-s-d.lib(InputImpl.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(InputImpl.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(JoystickImpl.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(JoystickImpl.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(VideoModeImpl.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(VideoModeImpl.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
      1>sfml-window-s-d.lib(WindowImplWin32.cpp.obj) : warning LNK4099: PDB 'sfml-window-s-d.pdb' was not found with 'sfml-window-s-d.lib(WindowImplWin32.cpp.obj)' or at 'C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\sfml-window-s-d.pdb'; linking object as if no debug info
@@ -62,4 +68,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.27
+Time Elapsed 00:00:01.25

@@ -31,8 +31,11 @@ public:
 
 	void DrawMenu();
 
+	void MenuSetup();
+	void MenuController();
 
-private:
+
+protected:
 
 	char * MenuTitle;
 
@@ -42,5 +45,20 @@ private:
 
 	sf::Font * Font;		//Display Font
 	sf::RenderWindow * RenderWindow; //Copy of our main rendering window
+
+};
+
+
+class Menu_Main : public Menu
+{
+
+public:
+
+	Menu_Main(char * Title, char * Font, sf::RenderWindow * RenderWindow);	//Initialize the font and all variables
+
+
+	void MenuSetup();
+	void MenuController();
+
 
 };

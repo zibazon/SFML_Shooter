@@ -26,6 +26,8 @@ Menu::Menu(char * Title, char * Font, sf::RenderWindow * RenderWindow)
 
 	ItemCount = 0;
 
+	this->MenuSetup();
+
 }
 
 
@@ -99,6 +101,19 @@ void Menu::DrawMenu()
 
 		Text.setString(sf::String(this->Items[CurrentItem]->Text));
 		Text.setPosition(100, 350 + (CurrentItem * 50));
+
+		if(Text.getGlobalBounds().contains( sf::Vector2f(sf::Mouse::getPosition(*this->RenderWindow)) ) )
+		{
+			Text.setPosition(150, 350 + (CurrentItem * 50));
+
+			Text.setColor(sf::Color::Blue);
+
+			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				
+				
+			}
+		}
 	
 		this->RenderWindow->draw( Text );
 
@@ -106,3 +121,53 @@ void Menu::DrawMenu()
 }
 
 
+void Menu::MenuSetup()
+{
+	//Overwrite this method
+}
+
+void Menu::MenuController()
+{
+	//Overwrite this method
+}
+
+
+
+
+//MainMenu Inherits From Menu
+Menu_Main::Menu_Main(char * Title, char * Font, sf::RenderWindow * RenderWindow) : Menu(Title, Font, RenderWindow)
+{
+
+	//Menu title duh
+	this->MenuTitle = Title; 
+
+	//Initialize font pointer
+	this->Font = new sf::Font;
+
+	//Load up the font
+	this->Font->loadFromFile(Font);
+
+	//Copy the pointer loacally for drawing
+	this->RenderWindow = RenderWindow; 
+
+	//Allocate List of Items up to MAX_ITEMS
+	this->Items = new Item*[MAX_ITEMS];
+
+	ItemCount = 0;
+
+	this->MenuSetup();
+
+}
+
+void Menu_Main::MenuSetup()
+{
+	this->AddMenuItem("Start Game", Types::STATIC_TEXT);
+	this->AddMenuItem("Options", Types::OPTION);
+	this->AddMenuItem("Quit", Types::STATIC_TEXT);
+}
+
+void Menu_Main::MenuController()
+{
+
+
+}
