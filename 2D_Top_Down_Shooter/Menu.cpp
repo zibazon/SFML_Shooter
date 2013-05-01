@@ -1,3 +1,6 @@
+
+#include "Windows.h"
+
 #include <SFML\System.hpp>
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
@@ -5,18 +8,16 @@
 #include "Menu.h"
 
 
-
-Menu::Menu(char * Title, char * Font, sf::RenderWindow * RenderWindow)
+Menu::Menu(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow)
 {
-
-	//Menu title duh
-	this->MenuTitle = Title; 
-
 	//Initialize font pointer
 	this->Font = new sf::Font;
 
 	//Load up the font
 	this->Font->loadFromFile(Font);
+
+	//Menu title duh
+	this->MenuTitle = new sf::Text(Title, *this->Font); 
 
 	//Copy the pointer loacally for drawing
 	this->RenderWindow = RenderWindow; 
@@ -24,8 +25,10 @@ Menu::Menu(char * Title, char * Font, sf::RenderWindow * RenderWindow)
 	//Allocate List of Items up to MAX_ITEMS
 	this->Items = new Item*[MAX_ITEMS];
 
+	//There are 0 items in the list!
 	ItemCount = 0;
 
+	//Setup the menu options
 	this->MenuSetup();
 
 }
@@ -46,11 +49,11 @@ Menu::~Menu()
 	//ALL THE THINGS
 }
 
-void Menu::AddMenuItem(char * Text, Types Type)
+void Menu::AddMenuItem(const std::string & Text, Types Type)
 {
 	this->Items[ItemCount] = new Item;					//Init
-	this->Items[ItemCount]->Type = Type;	//Set Type
-	this->Items[ItemCount]->Text = Text;				//Set Text;
+	this->Items[ItemCount]->Type = Type;				//Set Type
+	this->Items[ItemCount]->Text = new sf::Text( Text, *this->Font );	//Set Text/Font;
 
 	ItemCount++;	//Increment the item count to keep track
 }
@@ -60,36 +63,30 @@ void Menu::DrawMenu()
 {
 	//Draw the title
 
-	sf::Text Text; //This will be the text object we use to draw all of our menus text
-	Text.setFont(*this->Font); //Set the font
+	this->MenuTitle->setPosition(180, 80); //Set the position
+	this->MenuTitle->setCharacterSize(60);
 
-	Text.setPosition(180, 80); //Set the position
-	Text.setCharacterSize(60);
-
-	Text.setString(sf::String(this->MenuTitle));
-
-	this->RenderWindow->draw(Text); //Draw the menu title
-
-
-	Text.setCharacterSize(40);
+	this->RenderWindow->draw(*this->MenuTitle); //Draw the menu title
 
 	for(int CurrentItem = 0; CurrentItem < this->ItemCount; CurrentItem++)
 	{
+
+		this->Items[CurrentItem]->Text->setCharacterSize(40);
 
 		//switch through types and set specific color
 
 		switch(this->Items[CurrentItem]->Type)
 		{
 		case Types::STATIC_TEXT:
-			Text.setColor(sf::Color(150, 150, 150)); //Gray
+			this->Items[CurrentItem]->Text->setColor(sf::Color(150, 150, 150)); //Gray
 			break;
 
 		case Types::OPTION:
-			Text.setColor(sf::Color::White);
+			this->Items[CurrentItem]->Text->setColor(sf::Color::White);
 			break;
 
 		case Types::FOLDER:
-			Text.setColor(sf::Color::Blue);
+			this->Items[CurrentItem]->Text->setColor(sf::Color::Blue);
 			break;
 
 		default:
@@ -99,14 +96,14 @@ void Menu::DrawMenu()
 
 		//Check colision on text object at some point
 
-		Text.setString(sf::String(this->Items[CurrentItem]->Text));
-		Text.setPosition(100, 350 + (CurrentItem * 50));
+		this->Items[CurrentItem]->Text->setPosition(100, 350 + (CurrentItem * 50));
+		
 
-		if(Text.getGlobalBounds().contains( sf::Vector2f(sf::Mouse::getPosition(*this->RenderWindow)) ) )
+		if(this->Items[CurrentItem]->Text->getGlobalBounds().contains( sf::Vector2f(sf::Mouse::getPosition(*this->RenderWindow)) ) )
 		{
-			Text.setPosition(150, 350 + (CurrentItem * 50));
+			this->Items[CurrentItem]->Text->setPosition(110, 350 + (CurrentItem * 50));
 
-			Text.setColor(sf::Color::Blue);
+			//Maybe we can play a sound too!
 
 			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
@@ -115,7 +112,7 @@ void Menu::DrawMenu()
 			}
 		}
 	
-		this->RenderWindow->draw( Text );
+		this->RenderWindow->draw( *this->Items[CurrentItem]->Text );
 
 	}
 }
@@ -135,17 +132,17 @@ void Menu::MenuController()
 
 
 //MainMenu Inherits From Menu
-Menu_Main::Menu_Main(char * Title, char * Font, sf::RenderWindow * RenderWindow) : Menu(Title, Font, RenderWindow)
+Menu_Main::Menu_Main(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow) : Menu(Title, Font, RenderWindow)
 {
-
-	//Menu title duh
-	this->MenuTitle = Title; 
 
 	//Initialize font pointer
 	this->Font = new sf::Font;
 
 	//Load up the font
 	this->Font->loadFromFile(Font);
+
+	//Menu title duh
+	this->MenuTitle = new sf::Text(Title, *this->Font); 
 
 	//Copy the pointer loacally for drawing
 	this->RenderWindow = RenderWindow; 

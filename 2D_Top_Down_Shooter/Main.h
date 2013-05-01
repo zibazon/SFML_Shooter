@@ -1,3 +1,6 @@
+
+#pragma once
+
 #include <Windows.h>
 
 #include <SFML\System.hpp>
@@ -12,7 +15,8 @@
 
 
 
-namespace Game {
+namespace Game
+{
 
 	enum GameStates
 	{
@@ -31,7 +35,6 @@ namespace Game {
 	Menu * MainMenu;
 
 
-
 	//Initialize startup variables, Create the window, start rendering, initiate the game/menus etc.
 	void Init()
 	{
@@ -41,6 +44,8 @@ namespace Game {
 		MainWindow = new sf::RenderWindow(sf::VideoMode(1280, 720), "Game");
 
 		MainMenu = new Menu_Main("Menu Title", "Arial.ttf", MainWindow);
+
+		CurGameState = GameStates::MAIN_MENU;
 
 	}
 

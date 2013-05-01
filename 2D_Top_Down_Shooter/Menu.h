@@ -1,4 +1,6 @@
 
+#pragma once
+
 
 #define MAX_ITEMS 32		//Self explanitory
 
@@ -14,7 +16,7 @@ enum Types					//Menu item Types
 struct Item
 {
 	Types Type;				//Item Type
-	char * Text;				//Item Text
+	sf::Text * Text;		//Item Text
 };
 
 
@@ -24,10 +26,10 @@ class Menu
 
 public:
 
-	Menu(char * Title, char * Font, sf::RenderWindow * RenderWindow);					//Initialize the font and all variables
+	Menu(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow);					//Initialize the font and all variables
 	~Menu();
 
-	void AddMenuItem(char * Text, Types Type);
+	void AddMenuItem(const std::string & Text, Types Type);
 
 	void DrawMenu();
 
@@ -37,7 +39,7 @@ public:
 
 protected:
 
-	char * MenuTitle;
+	sf::Text * MenuTitle;
 
 	int ItemCount;
 	
@@ -54,7 +56,7 @@ class Menu_Main : public Menu
 
 public:
 
-	Menu_Main(char * Title, char * Font, sf::RenderWindow * RenderWindow);	//Initialize the font and all variables
+	Menu_Main(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow);	//Initialize the font and all variables
 
 
 	void MenuSetup();
