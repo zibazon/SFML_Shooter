@@ -30,7 +30,6 @@ Menu::Menu(const std::string & Title, const std::string & Font, sf::RenderWindow
 
 	//Setup the menu options
 	this->MenuSetup();
-
 }
 
 
@@ -49,7 +48,7 @@ Menu::~Menu()
 	//ALL THE THINGS
 }
 
-void Menu::AddMenuItem(const std::string & Text, Types Type)
+void Menu::AddMenuItem(const std::string & Text, ItemTypes Type)
 {
 	this->Items[ItemCount] = new Item;					//Init
 	this->Items[ItemCount]->Type = Type;				//Set Type
@@ -68,6 +67,8 @@ void Menu::DrawMenu()
 
 	this->RenderWindow->draw(*this->MenuTitle); //Draw the menu title
 
+	this->SelectedItem = -1;
+
 	for(int CurrentItem = 0; CurrentItem < this->ItemCount; CurrentItem++)
 	{
 
@@ -77,15 +78,15 @@ void Menu::DrawMenu()
 
 		switch(this->Items[CurrentItem]->Type)
 		{
-		case Types::STATIC_TEXT:
+		case ItemTypes::STATIC_TEXT:
 			this->Items[CurrentItem]->Text->setColor(sf::Color(150, 150, 150)); //Gray
 			break;
 
-		case Types::OPTION:
+		case ItemTypes::OPTION:
 			this->Items[CurrentItem]->Text->setColor(sf::Color::White);
 			break;
 
-		case Types::FOLDER:
+		case ItemTypes::FOLDER:
 			this->Items[CurrentItem]->Text->setColor(sf::Color::Blue);
 			break;
 
@@ -101,15 +102,11 @@ void Menu::DrawMenu()
 
 		if(this->Items[CurrentItem]->Text->getGlobalBounds().contains( sf::Vector2f(sf::Mouse::getPosition(*this->RenderWindow)) ) )
 		{
+			this->SelectedItem = CurrentItem;
 			this->Items[CurrentItem]->Text->setPosition(110, 350 + (CurrentItem * 50));
 
 			//Maybe we can play a sound too!
 
-			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			{
-				
-				
-			}
 		}
 	
 		this->RenderWindow->draw( *this->Items[CurrentItem]->Text );
@@ -158,13 +155,17 @@ Menu_Main::Menu_Main(const std::string & Title, const std::string & Font, sf::Re
 
 void Menu_Main::MenuSetup()
 {
-	this->AddMenuItem("Start Game", Types::STATIC_TEXT);
-	this->AddMenuItem("Options", Types::OPTION);
-	this->AddMenuItem("Quit", Types::STATIC_TEXT);
+	this->AddMenuItem("Start Game", ItemTypes::OPTION);
+	this->AddMenuItem("Options", ItemTypes::OPTION);
+	this->AddMenuItem("Quit", ItemTypes::OPTION);
 }
 
-void Menu_Main::MenuController()
+int Menu_Main::MenuController()
 {
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		return this->SelectedItem;
+	}
 
-
+	return -1;
 }

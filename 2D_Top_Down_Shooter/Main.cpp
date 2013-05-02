@@ -2,7 +2,7 @@
 #include "Main.h"
 
 
-void ObjectUpdateThread()
+void Game::UpdateThread()
 {
 	sf::Clock Ticks;
 	sf::Time TickTime;
@@ -14,10 +14,34 @@ void ObjectUpdateThread()
 
 		//Menu controller if were in the main menu
 
-		if(Game::CurGameState == Game::GameStates::MAIN_MENU)
+		switch(Game::CurGameState)
 		{
+		case Game::GameStates::MAIN_MENU:
 
-			Game::MainMenu->MenuController();
+			switch(Game::MainMenu->MenuController())
+			{
+			case 0:
+				Game::CurGameState = Game::GameStates::IN_GAME;
+				break;
+
+			case 1:
+				Game::CurGameState = Game::GameStates::OPTIONS_MENU;
+				break;
+
+			case 2:
+				Game::CurGameState = Game::GameStates::EXITING;
+				break;
+
+			default:
+				break;
+
+			}
+
+			break;
+
+		case Game::GameStates::IN_GAME:
+
+			break;
 
 		}
 
@@ -32,14 +56,10 @@ void ObjectUpdateThread()
 }
 
 
-
-
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nCmdShow)
 {
 
-
 	Game::Init(); //Initialize the window
-
 
 	while(Game::MainWindow->isOpen())
     {
@@ -52,19 +72,29 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
 
         Game::MainWindow->clear();		//Clear the frame buffer
 
-		if(Game::CurGameState == Game::GameStates::MAIN_MENU)
+		switch(Game::CurGameState)
 		{
+		case Game::GameStates::MAIN_MENU:
+				Game::MainMenu->DrawMenu();
+			break;
 
-			//Draw to the window buffer here
-			Game::MainMenu->DrawMenu();
+		case Game::GameStates::IN_GAME:
 
+			break;
+
+		case Game::GameStates::EXITING:
+			return 0;
+			break;
+
+		default:
+			return 0;
+			break;
+			
 		}
 
 
         Game::MainWindow->display();	//Draw the buffer to the screen
     }
-
-
 
     return 0;
 }

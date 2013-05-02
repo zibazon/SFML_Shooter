@@ -23,19 +23,20 @@ namespace Game
 		MAIN_MENU,
 		OPTIONS_MENU,
 		IN_GAME,
-		PAUSED
+		PAUSED,
+		EXITING
 	};
-
 
 	//Global Variables
 
 	GameStates CurGameState; //What menu are we in? What should be rendered/not rendered
+
 	sf::RenderWindow * MainWindow; //Our main render window
 
-	Menu * MainMenu;
+	Menu_Main * MainMenu;
 
+	void UpdateThread();
 
-	//Initialize startup variables, Create the window, start rendering, initiate the game/menus etc.
 	void Init()
 	{
 		//Create preferred settings loading before opening the window so we get the resolution right
@@ -47,11 +48,11 @@ namespace Game
 
 		CurGameState = GameStates::MAIN_MENU;
 
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)UpdateThread, NULL, NULL, NULL);
 	}
 
 	
 
-	//Store information on screen resolution and other simple settings like that
 
 };
 

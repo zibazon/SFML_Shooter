@@ -5,18 +5,12 @@
 #define MAX_ITEMS 32		//Self explanitory
 
 
-enum Types					//Menu item Types
+
+enum ItemTypes					//Menu item Types
 {
 	STATIC_TEXT,			//Unclickable text
 	OPTION,					//Clickable item
 	FOLDER					//Folder that contains other items
-};
-
-
-struct Item
-{
-	Types Type;				//Item Type
-	sf::Text * Text;		//Item Text
 };
 
 
@@ -29,17 +23,24 @@ public:
 	Menu(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow);					//Initialize the font and all variables
 	~Menu();
 
-	void AddMenuItem(const std::string & Text, Types Type);
+	void AddMenuItem(const std::string & Text, ItemTypes Type);
 
 	void DrawMenu();
 
 	void MenuSetup();
 	void MenuController();
 
+	struct Item
+	{
+		ItemTypes Type;				//Item Type
+		sf::Text * Text;		//Item Text
+	};
 
 protected:
 
 	sf::Text * MenuTitle;
+
+	int SelectedItem;
 
 	int ItemCount;
 	
@@ -60,7 +61,7 @@ public:
 
 
 	void MenuSetup();
-	void MenuController();
+	int MenuController();
 
 
 };
