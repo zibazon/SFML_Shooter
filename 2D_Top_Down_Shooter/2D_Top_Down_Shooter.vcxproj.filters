@@ -14,11 +14,17 @@
     <Filter Include="TilingEngine\Engine">
       <UniqueIdentifier>{96877086-10e2-4525-a51d-230d583c0a21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TilingEngine\Tile">
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{069bbb78-27d0-46f6-935b-d5d309cd6bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Tile">
       <UniqueIdentifier>{3889f51b-160e-4802-af09-27462e4e5c26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TilingEngine\Level Manager">
+    <Filter Include="TilingEngine\Level">
       <UniqueIdentifier>{d4aa3243-c2c1-41c3-95f6-9312c175e99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TilingEngine\Camera">
+      <UniqueIdentifier>{a4d939fc-1743-43a8-a138-746fb79defaa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +38,16 @@
       <Filter>TilingEngine\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>TilingEngine\Tile</Filter>
+      <Filter>GameObjects\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>TilingEngine\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>TilingEngine\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,7 +61,16 @@
       <Filter>TilingEngine\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>TilingEngine\Tile</Filter>
+      <Filter>GameObjects\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>TilingEngine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>TilingEngine\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

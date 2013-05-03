@@ -2,17 +2,25 @@
 
 #pragma once
 
+#include <Windows.h>
 
-class TilingEngine
+#include <SFML\System.hpp>
+#include <SFML\Window.hpp>
+#include <SFML\Graphics.hpp>
+
+#include "Level.h"
+
+class Engine
 {
 
 public:
 
-	TilingEngine(sf::RenderWindow * RenderWindow);
-	~TilingEngine();
+	Engine(sf::RenderWindow * RenderWindow, sf::Vector2i TileSize);
+	~Engine();
 
 
 	void DrawTiles();
+	void Update();
 
 
 private:
@@ -22,5 +30,7 @@ private:
 	sf::RenderWindow * RenderWindow;
 
 	sf::Image * TileImageSet;
+
+	sf::Vector2i TileSize;
 
 };

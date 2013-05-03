@@ -1,6 +1,12 @@
 
 #pragma once
 
+#include <Windows.h>
+
+#include <SFML\System.hpp>
+#include <SFML\Window.hpp>
+#include <SFML\Graphics.hpp>
+
 
 #define MAX_ITEMS 32		//Self explanitory
 
