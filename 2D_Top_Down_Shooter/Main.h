@@ -45,7 +45,7 @@ namespace Game
 		//Initialize our render window
 		MainWindow = new sf::RenderWindow(sf::VideoMode(1280, 720), "Game");
 
-		MainMenu = new Menu_Main("Menu Title", "Arial.ttf", MainWindow);
+		MainMenu = new Menu_Main("Menu Title", "Arial.ttf");
 
 		CurGameState = GameStates::MAIN_MENU;
 

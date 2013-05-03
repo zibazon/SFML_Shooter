@@ -14,10 +14,17 @@ class Camera
 
 public:
 
-	Camera();
+	Camera(sf::Vector2f CenterCoords, sf::RenderWindow * RenderWindow);
 	~Camera();
 
+	//Scroll center view to coordinates
+	void Pan(sf::Vector2f Coords);
 
+	//Center view immediatly on coordinates
+	void Move(sf::Vector2f Coords);
+
+	//Updates the camera position
+	void Update();
 
 private:
 

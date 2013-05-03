@@ -80,7 +80,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
 		switch(Game::CurGameState)
 		{
 		case Game::GameStates::MAIN_MENU:
-				Game::MainMenu->DrawMenu();
+				Game::MainMenu->DrawMenu(Game::MainWindow);
 			break;
 
 		case Game::GameStates::IN_GAME:

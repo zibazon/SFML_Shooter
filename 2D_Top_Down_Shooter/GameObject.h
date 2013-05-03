@@ -16,7 +16,7 @@ class GameObject
 {
 
 public:
-	GameObject(sf::Vector2f Position, std::string & TextureName, sf::IntRect TextureArea);
+	GameObject(sf::Vector2f Position);
 	~GameObject();
 
 	void Draw(sf::RenderWindow * RenderWindow);
@@ -24,12 +24,11 @@ public:
 	void SetPosition(sf::Vector2f Position);
 	sf::Vector2f GetPosition();
 
-	bool SetTexture(std::string & TextureName, sf::IntRect TextureArea);
+	void SetTexture(sf::Texture & Texture);
 
 
 protected:
 
-	sf::Texture * Texture;
 	sf::Sprite * Sprite;
 
 };

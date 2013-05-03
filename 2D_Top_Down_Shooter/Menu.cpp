@@ -4,7 +4,7 @@
 #include "Menu.h"
 
 
-Menu::Menu(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow)
+Menu::Menu(const std::string & Title, const std::string & Font)
 {
 	//Initialize font pointer
 	this->Font = new sf::Font;
@@ -14,9 +14,6 @@ Menu::Menu(const std::string & Title, const std::string & Font, sf::RenderWindow
 
 	//Menu title duh
 	this->MenuTitle = new sf::Text(Title, *this->Font); 
-
-	//Copy the pointer loacally for drawing
-	this->RenderWindow = RenderWindow; 
 
 	//Allocate List of Items up to MAX_ITEMS
 	this->Items = new Item*[MAX_ITEMS];
@@ -54,14 +51,14 @@ void Menu::AddMenuItem(const std::string & Text, ItemTypes Type)
 }
 
 
-void Menu::DrawMenu()
+void Menu::DrawMenu(sf::RenderWindow * RenderWindow)
 {
 	//Draw the title
 
 	this->MenuTitle->setPosition(180, 80); //Set the position
 	this->MenuTitle->setCharacterSize(60);
 
-	this->RenderWindow->draw(*this->MenuTitle); //Draw the menu title
+	RenderWindow->draw(*this->MenuTitle); //Draw the menu title
 
 	this->SelectedItem = -1;
 
@@ -96,7 +93,7 @@ void Menu::DrawMenu()
 		this->Items[CurrentItem]->Text->setPosition(100, 350 + (CurrentItem * 50));
 		
 
-		if(this->Items[CurrentItem]->Text->getGlobalBounds().contains( sf::Vector2f(sf::Mouse::getPosition(*this->RenderWindow)) ) )
+		if(this->Items[CurrentItem]->Text->getGlobalBounds().contains( sf::Vector2f(sf::Mouse::getPosition(*RenderWindow)) ) )
 		{
 			this->SelectedItem = CurrentItem;
 			this->Items[CurrentItem]->Text->setPosition(110, 350 + (CurrentItem * 50));
@@ -105,7 +102,7 @@ void Menu::DrawMenu()
 
 		}
 	
-		this->RenderWindow->draw( *this->Items[CurrentItem]->Text );
+		RenderWindow->draw( *this->Items[CurrentItem]->Text );
 
 	}
 }
@@ -125,7 +122,7 @@ void Menu::MenuController()
 
 
 //MainMenu Inherits From Menu
-Menu_Main::Menu_Main(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow) : Menu(Title, Font, RenderWindow)
+Menu_Main::Menu_Main(const std::string & Title, const std::string & Font) : Menu(Title, Font)
 {
 
 	//Initialize font pointer
@@ -136,9 +133,6 @@ Menu_Main::Menu_Main(const std::string & Title, const std::string & Font, sf::Re
 
 	//Menu title duh
 	this->MenuTitle = new sf::Text(Title, *this->Font); 
-
-	//Copy the pointer loacally for drawing
-	this->RenderWindow = RenderWindow; 
 
 	//Allocate List of Items up to MAX_ITEMS
 	this->Items = new Item*[MAX_ITEMS];

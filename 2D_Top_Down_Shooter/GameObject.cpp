@@ -2,12 +2,9 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(sf::Vector2f Position, std::string & TextureName, sf::IntRect TextureArea)
+GameObject::GameObject(sf::Vector2f Position)
 {
-	this->Texture = new sf::Texture();
-	this->Texture->loadFromFile(TextureName, TextureArea);
-
-	this->Sprite = new sf::Sprite(*this->Texture);
+	this->Sprite = new sf::Sprite();
 
 	this->Sprite->setPosition(Position);
 }
@@ -15,7 +12,6 @@ GameObject::GameObject(sf::Vector2f Position, std::string & TextureName, sf::Int
 GameObject::~GameObject()
 {
 	delete this->Sprite;
-	delete this->Texture;
 }
 
 void GameObject::Draw(sf::RenderWindow * RenderWindow)
@@ -31,4 +27,9 @@ void GameObject::SetPosition(sf::Vector2f Position)
 sf::Vector2f GameObject::GetPosition()
 {
 	return this->Sprite->getPosition();
+}
+
+void GameObject::SetTexture(sf::Texture & Texture)
+{
+	this->Sprite->setTexture(Texture);
 }

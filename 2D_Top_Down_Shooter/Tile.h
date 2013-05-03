@@ -15,11 +15,14 @@ class Tile : public GameObject
 
 public:
 
-	Tile(sf::Vector2f Position, std::string & TextureName, sf::IntRect TextureArea);
+	Tile(sf::Vector2f Position);
 	~Tile();
+
+	void Draw(sf::Vector2f Position, sf::RenderWindow * RenderWindow);
 
 	void SetMovementCost(float Cost);
 	float GetMovementCost();
+
 
 private:
 

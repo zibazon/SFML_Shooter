@@ -26,12 +26,12 @@ class Menu
 
 public:
 
-	Menu(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow);					//Initialize the font and all variables
+	Menu(const std::string & Title, const std::string & Font);					//Initialize the font and all variables
 	~Menu();
 
 	void AddMenuItem(const std::string & Text, ItemTypes Type);
 
-	void DrawMenu();
+	void DrawMenu(sf::RenderWindow * RenderWindow);
 
 	void MenuSetup();
 	void MenuController();
@@ -53,7 +53,6 @@ protected:
 	Item ** Items;			//Our list of items
 
 	sf::Font * Font;		//Display Font
-	sf::RenderWindow * RenderWindow; //Copy of our main rendering window
 
 };
 
@@ -63,7 +62,7 @@ class Menu_Main : public Menu
 
 public:
 
-	Menu_Main(const std::string & Title, const std::string & Font, sf::RenderWindow * RenderWindow);	//Initialize the font and all variables
+	Menu_Main(const std::string & Title, const std::string & Font);	//Initialize the font and all variables
 
 
 	void MenuSetup();

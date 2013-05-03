@@ -8,7 +8,9 @@
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 
+#include "Tile.h"
 #include "Level.h"
+#include "Camera.h"
 
 class Engine
 {
@@ -30,5 +32,7 @@ private:
 	sf::Image * TileImageSet;
 
 	sf::Vector2i TileSize;
+
+	Camera * CameraView;
 
 };

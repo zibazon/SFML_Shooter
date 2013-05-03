@@ -8,23 +8,26 @@
     <Filter Include="Menus">
       <UniqueIdentifier>{bbc8d59c-f1b9-4a8e-aca7-b844fab054d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TilingEngine">
+    <Filter Include="Tiling Engine">
       <UniqueIdentifier>{292fe9bb-068c-4482-bc53-b8ce54f1aa07}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TilingEngine\Engine">
+    <Filter Include="Tiling Engine\Engine">
       <UniqueIdentifier>{96877086-10e2-4525-a51d-230d583c0a21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects">
-      <UniqueIdentifier>{069bbb78-27d0-46f6-935b-d5d309cd6bb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Tile">
-      <UniqueIdentifier>{3889f51b-160e-4802-af09-27462e4e5c26}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TilingEngine\Level">
+    <Filter Include="Tiling Engine\Level">
       <UniqueIdentifier>{d4aa3243-c2c1-41c3-95f6-9312c175e99c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TilingEngine\Camera">
+    <Filter Include="Tiling Engine\Camera">
       <UniqueIdentifier>{a4d939fc-1743-43a8-a138-746fb79defaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Objects">
+      <UniqueIdentifier>{069bbb78-27d0-46f6-935b-d5d309cd6bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Objects\Tile">
+      <UniqueIdentifier>{3889f51b-160e-4802-af09-27462e4e5c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image Manager">
+      <UniqueIdentifier>{04db4b42-5190-43eb-9ded-0a6aeab1a332}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,19 +38,22 @@
       <Filter>Menus</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>TilingEngine\Engine</Filter>
+      <Filter>Tiling Engine\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>GameObjects\Tile</Filter>
+      <Filter>Game Objects\Tile</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>TilingEngine\Level</Filter>
+      <Filter>Tiling Engine\Level</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>TilingEngine\Camera</Filter>
+      <Filter>Tiling Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Image Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,19 +64,22 @@
       <Filter>Menus</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>TilingEngine\Engine</Filter>
+      <Filter>Tiling Engine\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>GameObjects\Tile</Filter>
+      <Filter>Game Objects\Tile</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>TilingEngine\Level</Filter>
+      <Filter>Tiling Engine\Level</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>TilingEngine\Camera</Filter>
+      <Filter>Tiling Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Image Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,13 +3,9 @@
 #include "Tile.h"
 
 
-Tile::Tile(sf::Vector2f Position, std::string & TextureName, sf::IntRect TextureArea) : GameObject(Position, TextureName, TextureArea)
+Tile::Tile(sf::Vector2f Position) : GameObject(Position)
 {
-	this->Texture = new sf::Texture();
-	this->Texture->loadFromFile(TextureName, TextureArea);
-
-	this->Sprite = new sf::Sprite(*this->Texture);
-
+	this->Sprite = new sf::Sprite();
 	this->Sprite->setPosition(Position);
 }
 
@@ -17,7 +13,12 @@ Tile::Tile(sf::Vector2f Position, std::string & TextureName, sf::IntRect Texture
 Tile::~Tile()
 {
 	delete this->Sprite;
-	delete this->Texture;
+}
+
+void Tile::Draw(sf::Vector2f Position, sf::RenderWindow * RenderWindow)
+{
+	this->Sprite->setPosition(Position);
+	RenderWindow->draw(*this->Sprite);
 }
 
 void Tile::SetMovementCost(float Cost)
