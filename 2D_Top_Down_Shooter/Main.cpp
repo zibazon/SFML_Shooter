@@ -45,6 +45,9 @@ void Game::UpdateThread()
 
 			//Are we in game?
 		case Game::GameStates::IN_GAME:
+			
+			//Update the game engine
+			Game::GameEngine->Update();
 
 			break;
 
@@ -73,6 +76,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
         {
             if (event.type == sf::Event::Closed)
                 Game::MainWindow->close();
+			
         }
 
         Game::MainWindow->clear();		//Clear the frame buffer
@@ -84,6 +88,9 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
 			break;
 
 		case Game::GameStates::IN_GAME:
+
+			//Draw the tiles
+			Game::GameEngine->DrawTiles();
 
 			break;
 

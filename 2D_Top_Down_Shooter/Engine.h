@@ -24,6 +24,8 @@ public:
 	void DrawTiles();
 	void Update();
 
+	void ToggleGrid();
+
 
 private:
 
@@ -34,5 +36,7 @@ private:
 	sf::Vector2i TileSize;
 
 	Camera * CameraView;
+
+	bool ShowGrid;
 
 };

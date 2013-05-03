@@ -35,6 +35,7 @@ namespace Game
 	sf::RenderWindow * MainWindow; //Our main render window
 
 	Menu_Main * MainMenu;
+	Engine * GameEngine;
 
 	void UpdateThread();
 
@@ -50,6 +51,9 @@ namespace Game
 		CurGameState = GameStates::MAIN_MENU;
 
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)UpdateThread, NULL, NULL, NULL);
+
+		GameEngine = new Engine(MainWindow, sf::Vector2i(32, 32));
+		GameEngine->ToggleGrid();
 	}
 
 	
