@@ -1,17 +1,21 @@
-﻿Build started 5/2/2013 10:32:30 PM.
+﻿Build started 5/3/2013 1:21:19 AM.
      1>Project "C:\Users\Sean\Documents\GitHub\SFML_Shooter\2D_Top_Down_Shooter\2D_Top_Down_Shooter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\2D_Top_Down_Shooter.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         All outputs are up-to-date.
-       Link:
-         All outputs are up-to-date.
-         2D_Top_Down_Shooter.vcxproj -> C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\Game.exe
-       FinalizeBuildStatus:
-         Deleting file "Debug\2D_Top_Down_Shooter.unsuccessfulbuild".
-         Touching "Debug\2D_Top_Down_Shooter.lastbuildstate".
-     1>Done Building Project "C:\Users\Sean\Documents\GitHub\SFML_Shooter\2D_Top_Down_Shooter\2D_Top_Down_Shooter.vcxproj" (build target(s)).
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Sean\Documents\Visual Studio 2010\SFML-2.0_x86\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp Engine.cpp GameObject.cpp Tile.cpp
+         Tile.cpp
+         GameObject.cpp
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\gameobject.cpp(36): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\gameobject.cpp(36): error C2227: left of '->Position' must point to class/struct/union/generic type
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\gameobject.cpp(41): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\gameobject.cpp(41): error C2227: left of '->Position' must point to class/struct/union/generic type
+         Camera.cpp
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         Engine.cpp
+     1>Done Building Project "C:\Users\Sean\Documents\GitHub\SFML_Shooter\2D_Top_Down_Shooter\2D_Top_Down_Shooter.vcxproj" (build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:00.05
+Time Elapsed 00:00:03.30

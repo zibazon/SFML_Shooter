@@ -25,8 +25,6 @@ public:
 
 private:
 
-	sf::View * Camera;
-
 	sf::RenderWindow * RenderWindow;
 
 	sf::Image * TileImageSet;

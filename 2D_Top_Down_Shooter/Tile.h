@@ -15,11 +15,14 @@ class Tile : public GameObject
 
 public:
 
-	Tile();
+	Tile(sf::Vector2f Position, std::string & TextureName, sf::IntRect TextureArea);
 	~Tile();
+
+	void SetMovementCost(float Cost);
+	float GetMovementCost();
 
 private:
 
-
+	float Cost; //Used for AI path finding
 
 };

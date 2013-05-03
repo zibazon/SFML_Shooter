@@ -15,14 +15,21 @@
 class GameObject
 {
 
-
 public:
-
-	GameObject();
+	GameObject(sf::Vector2f Position, std::string & TextureName, sf::IntRect TextureArea);
 	~GameObject();
 
-private:
+	void Draw(sf::RenderWindow * RenderWindow);
 
-	sf::Vector2f Position;
+	void SetPosition(sf::Vector2f Position);
+	sf::Vector2f GetPosition();
+
+	bool SetTexture(std::string & TextureName, sf::IntRect TextureArea);
+
+
+protected:
+
+	sf::Texture * Texture;
+	sf::Sprite * Sprite;
 
 };
