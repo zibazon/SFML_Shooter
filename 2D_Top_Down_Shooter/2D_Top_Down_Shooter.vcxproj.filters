@@ -11,6 +11,15 @@
     <Filter Include="TilingEngine">
       <UniqueIdentifier>{292fe9bb-068c-4482-bc53-b8ce54f1aa07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TilingEngine\Engine">
+      <UniqueIdentifier>{96877086-10e2-4525-a51d-230d583c0a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TilingEngine\Tile">
+      <UniqueIdentifier>{3889f51b-160e-4802-af09-27462e4e5c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TilingEngine\Level Manager">
+      <UniqueIdentifier>{d4aa3243-c2c1-41c3-95f6-9312c175e99c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -19,8 +28,11 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Tiling.cpp">
-      <Filter>TilingEngine</Filter>
+    <ClCompile Include="Engine.cpp">
+      <Filter>TilingEngine\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>TilingEngine\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,8 +42,11 @@
     <ClInclude Include="Menu.h">
       <Filter>Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Tiling.h">
-      <Filter>TilingEngine</Filter>
+    <ClInclude Include="Engine.h">
+      <Filter>TilingEngine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>TilingEngine\Tile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

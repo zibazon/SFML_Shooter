@@ -18,6 +18,7 @@ void Game::UpdateThread()
 		{
 		case Game::GameStates::MAIN_MENU:
 
+			//Menu Response
 			switch(Game::MainMenu->MenuController())
 			{
 			case 0:
@@ -39,6 +40,10 @@ void Game::UpdateThread()
 
 			break;
 
+
+
+
+			//Are we in game?
 		case Game::GameStates::IN_GAME:
 
 			break;

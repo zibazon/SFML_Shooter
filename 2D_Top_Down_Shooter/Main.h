@@ -8,6 +8,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "Menu.h"
+#include "Engine.h"
 
 
 //This is the main namespace, it handles all "Globals"
