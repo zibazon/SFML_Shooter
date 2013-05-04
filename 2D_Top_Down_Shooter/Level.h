@@ -2,11 +2,14 @@
 #pragma once
 
 #include <Windows.h>
+#include <iostream>
+#include <fstream>
 
 #include <SFML\Graphics.hpp>
 
 #include "Tile.h"
 #include "ImageManager.h"
+
 
 class Level
 {

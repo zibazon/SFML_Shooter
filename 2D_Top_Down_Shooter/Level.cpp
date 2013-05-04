@@ -40,6 +40,40 @@ Tile * Level::getTile(int x, int y)
 int Level::LoadLevel(std::string & TileSet, std::string & FileName)
 {
 
+
+
+	//Load Level Layout
+	Tile * tile;
+
+	//Open our level settings file
+	std::ifstream Settings;
+	Settings.open(FileName, std::ios::in);
+
+
+
+	for(int y = 0; y < this->Height; y++)
+	{
+		for(int x = 0; x < Width; x++)
+		{
+			if(y % 4 == 0)
+				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(1));
+			else
+				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(0));
+
+			addTile(x, y, tile);
+		}
+	}
+	
+
+
+
+
+	//Load tileset filename from settings file
+
+
+
+
+
 	//Load Tileset for level
 	sf::Image FullSet;
 
@@ -63,22 +97,6 @@ int Level::LoadLevel(std::string & TileSet, std::string & FileName)
 		}
 	}
 
-
-	//Load Level Layout
-	Tile * tile;
-	for(int y = 0; y < this->Height; y++)
-	{
-		for(int x = 0; x < Width; x++)
-		{
-			if(y % 4 == 0)
-				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(1));
-			else
-				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(0));
-
-			addTile(x, y, tile);
-		}
-	}
-	
 
 	return 1;
 }
