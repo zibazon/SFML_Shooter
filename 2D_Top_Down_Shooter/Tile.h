@@ -15,7 +15,7 @@ class Tile : public GameObject
 
 public:
 
-	Tile(sf::Vector2f Position);
+	Tile(sf::Vector2f Position, sf::Texture * Texture);
 	~Tile();
 
 	void Draw(sf::Vector2f Position, sf::RenderWindow * RenderWindow);

@@ -2,11 +2,16 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(sf::Vector2f Position)
+GameObject::GameObject(sf::Vector2f Position, sf::Texture * Texture)
 {
 	this->Sprite = new sf::Sprite();
 
 	this->Sprite->setPosition(Position);
+
+	if(Texture != NULL)
+	{
+		this->Sprite->setTexture(*Texture);
+	}
 }
 
 GameObject::~GameObject()

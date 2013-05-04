@@ -3,10 +3,15 @@
 #include "Tile.h"
 
 
-Tile::Tile(sf::Vector2f Position) : GameObject(Position)
+Tile::Tile(sf::Vector2f Position, sf::Texture * Texture) : GameObject(Position, Texture)
 {
 	this->Sprite = new sf::Sprite();
 	this->Sprite->setPosition(Position);
+
+	if(Texture != NULL)
+	{
+		this->Sprite->setTexture(*Texture);
+	}
 }
 
 

@@ -17,7 +17,7 @@ class Engine
 
 public:
 
-	Engine(sf::RenderWindow * RenderWindow, sf::Vector2i TileSize);
+	Engine(sf::RenderWindow * RenderWindow, int TileSize);
 	~Engine();
 
 
@@ -25,6 +25,9 @@ public:
 	void Update();
 
 	void ToggleGrid();
+	void ToggleEditor();
+
+	void SetLevel(std::string & TileSet, std::string & FileName);
 
 
 private:
@@ -33,10 +36,14 @@ private:
 
 	sf::Image * TileImageSet;
 
-	sf::Vector2i TileSize;
+	int TileSize;
+
+	Level * CurrentLevel;
 
 	Camera * CameraView;
 
 	bool ShowGrid;
+
+	bool isEditing;
 
 };

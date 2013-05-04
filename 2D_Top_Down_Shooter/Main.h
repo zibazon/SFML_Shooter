@@ -52,8 +52,10 @@ namespace Game
 
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)UpdateThread, NULL, NULL, NULL);
 
-		GameEngine = new Engine(MainWindow, sf::Vector2i(32, 32));
-		GameEngine->ToggleGrid();
+		GameEngine = new Engine(MainWindow, 32);
+
+		GameEngine->SetLevel(std::string("Assets/TileSets/Level1.png"), std::string(""));
+
 	}
 
 	

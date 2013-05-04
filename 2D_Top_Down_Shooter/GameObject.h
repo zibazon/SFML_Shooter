@@ -16,7 +16,7 @@ class GameObject
 {
 
 public:
-	GameObject(sf::Vector2f Position);
+	GameObject(sf::Vector2f Position, sf::Texture * Texture);
 	~GameObject();
 
 	void Draw(sf::RenderWindow * RenderWindow);

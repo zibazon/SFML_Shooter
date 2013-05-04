@@ -3,24 +3,22 @@
 
 #include <Windows.h>
 
-#include <SFML\System.hpp>
-#include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 
-
 #include "Tile.h"
+#include "ImageManager.h"
 
 class Level
 {
 
 public:
-	Level(int Width, int Height);
+	Level(int Width, int Height, int TileSize);
 	~Level();
 	
-	void AddTile(int x, int y, Tile * tile);
-	Tile * GetTile(int x, int y);
+	void addTile(int x, int y, Tile * tile);
+	Tile * getTile(int x, int y);
 
-	void LoadLevel(std::string & FileName);
+	int LoadLevel(std::string & TileSet, std::string & FileName);
 
 	int getWidth();
 	int getHeight();
@@ -32,6 +30,12 @@ private:
 	int Width;
 	int Height;
 
+	int TileSize;
+
 	std::vector<std::vector<Tile*>> Map;
+
+	void setDimensions(int Width, int Height);
+
+	ImageManager * TileSet;
 
 };
