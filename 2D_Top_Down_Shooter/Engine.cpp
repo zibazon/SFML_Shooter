@@ -13,7 +13,7 @@ Engine::Engine(sf::RenderWindow * RenderWindow, int TileSize)
 	this->RenderWindow = RenderWindow;
 
 	//Setup camera and viewport
-	this->CameraView = new Camera(sf::Vector2f(this->RenderWindow->getSize().x /2, this->RenderWindow->getSize().y /2), RenderWindow);
+	this->CameraView = new Camera(sf::Vector2f(this->RenderWindow->getSize().x /2 - 100, this->RenderWindow->getSize().y /2 - 100), RenderWindow);
 
 	this->TileSize = TileSize;
 
@@ -21,6 +21,7 @@ Engine::Engine(sf::RenderWindow * RenderWindow, int TileSize)
 
 	this->ShowGrid = false;
 	this->isEditing = false;
+	this->isInit = false;
 
 }
 
@@ -29,27 +30,50 @@ Engine::~Engine()
 
 }
 
-void Engine::DrawTiles()
+void Engine::Init()
+{
+
+	if (this->isInit)
+		return;
+
+	this->Font = new sf::Font();
+	this->Font->loadFromFile("Arial.ttf");
+
+
+	this->CameraView->Activate();
+
+	this->KeyPressDelay = GetTickCount();
+
+	this->isInit = true;
+}
+
+//All of the rendering is done in this function
+//Do not Draw from anywhere else!
+void Engine::Render()
 {
 
 	sf::VertexArray Line(sf::Lines, 2);
 
-	Line[0].color = sf::Color(140, 140, 140, 255);
-	Line[1].color = sf::Color(140, 140, 140, 255);
+	Line[0].color = sf::Color(200, 200, 200, 255);
+	Line[1].color = sf::Color(200, 200, 200, 255);
 
-	for(int x = 0; x < this->CurrentLevel->getWidth(); x++) //Width
+	for(int x = 0; x <= this->CurrentLevel->getWidth(); x++) //Width
 	{
-
-		for( int y = 0; y < this->CurrentLevel->getHeight(); y++) //Height
+		for(int y = 0; y <= this->CurrentLevel->getHeight(); y++) //Height
 		{
 
 			//Doesn't cover the last row!
-			Line[0].position = sf::Vector2f(x * this->TileSize, y * this->TileSize);
-			Line[1].position = sf::Vector2f(x, y * this->TileSize);
+			Line[0].position = sf::Vector2f(0, y * this->TileSize);
+
+			Line[1].position = sf::Vector2f((this->TileSize * this->CurrentLevel->getWidth()), y * this->TileSize);//End point
+
 			if(this->ShowGrid) this->RenderWindow->draw(Line);
 
-			Line[0].position = sf::Vector2f(x * this->TileSize, y);
-			Line[1].position = sf::Vector2f(x * this->TileSize, y * this->TileSize);
+
+			Line[0].position = sf::Vector2f(x * this->TileSize, 0);
+
+			Line[1].position = sf::Vector2f(x * this->TileSize, (this->TileSize * this->CurrentLevel->getHeight()));//End point
+
 			if(this->ShowGrid) this->RenderWindow->draw(Line);
 
 
@@ -63,23 +87,61 @@ void Engine::DrawTiles()
 
 	}
 
+
+	if(this->isEditing)
+	{
+		this->DebugOutput();
+	}
+
+
+
 }
+
+
+void Engine::DebugOutput()
+{
+
+
+	//Mouse coordinates
+	//Hovering Tile
+	//Change tiles? thats for the editor to do....
+	//Frames Per Second
+
+	sf::Text Txt;
+	Txt.setFont(*this->Font);
+
+	Txt.setString("Hello World");
+
+	Txt.setColor(sf::Color::White);
+
+	Txt.setCharacterSize(12);
+
+	Txt.setPosition(this->CameraView->getPosition());
+
+
+	this->RenderWindow->draw(Txt);
+
+
+
+}
+
+
 
 void Engine::Update()
 {
 
+
 	//Toggle edit mode
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E) && this->KeyPressDelay < GetTickCount())
 	{
 		this->isEditing = !this->isEditing;
+		this->KeyPressDelay = GetTickCount() + 200;
 	}
 
 
 	if(this->isEditing)
 	{
 		//Editing mode!
-
-		//output debug info
 
 		//allow dynamic changing of tiles
 
@@ -102,7 +164,7 @@ void Engine::ToggleGrid()
 	this->ShowGrid = !this->ShowGrid;
 }
 
-void Engine::SetLevel(std::string & TileSet, std::string & FileName)
+void Engine::SetLevel(std::string & FileName)
 {
-	this->CurrentLevel->LoadLevel(TileSet, FileName);
+	this->CurrentLevel->LoadLevel(FileName);
 }

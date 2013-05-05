@@ -36,7 +36,7 @@ namespace Game
 
 	Menu_Main * MainMenu;
 	Engine * GameEngine;
-
+	
 	void UpdateThread();
 
 	void Init()
@@ -54,7 +54,8 @@ namespace Game
 
 		GameEngine = new Engine(MainWindow, 32);
 
-		GameEngine->SetLevel(std::string("Assets/TileSets/Level1.png"), std::string(""));
+		GameEngine->SetLevel(std::string("Images/Level1.png"));
+		GameEngine->ToggleGrid();
 
 	}
 

@@ -45,6 +45,7 @@ void Game::UpdateThread()
 
 			//Are we in game?
 		case Game::GameStates::IN_GAME:
+
 			
 			//Update the game engine
 			Game::GameEngine->Update();
@@ -76,7 +77,6 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
         {
             if (event.type == sf::Event::Closed)
                 Game::MainWindow->close();
-			
         }
 
         Game::MainWindow->clear();		//Clear the frame buffer
@@ -89,8 +89,10 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
 
 		case Game::GameStates::IN_GAME:
 
+			Game::GameEngine->Init(); //Should only run once though I should do this a different way
 			//Draw the tiles
-			Game::GameEngine->DrawTiles();
+
+			Game::GameEngine->Render();
 
 			break;
 

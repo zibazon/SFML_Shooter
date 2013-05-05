@@ -15,6 +15,8 @@ public:
 	Camera(sf::Vector2f CenterCoords, sf::RenderWindow * RenderWindow);
 	~Camera();
 
+	void Activate();
+
 	//Scroll center view to coordinates
 	void Pan(sf::Vector2f Coords);
 
@@ -23,6 +25,9 @@ public:
 
 	//Updates the camera position
 	void Update();
+
+
+	sf::Vector2f getPosition();
 
 private:
 

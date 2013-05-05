@@ -1,0 +1,30 @@
+#Lines starting with hashbangs are comments
+
+
+#TileMap File Name
+TileMap = "Level1.png"
+
+#Map Size
+
+MapSizeX = 4
+MapSizeY = 4
+
+
+TileMap = {
+
+1, 1, 1, 1
+1, 2, 2, 1
+1, 2, 2, 1
+1, 1, 1, 1
+
+}
+
+#Enemies, lights, etc...
+
+GameObjects = {
+
+Light(Point, 100, 200)
+Enemy(Type, 100, 100)
+
+
+}

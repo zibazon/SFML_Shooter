@@ -37,9 +37,11 @@ Tile * Level::getTile(int x, int y)
 		return NULL;
 }
 
-int Level::LoadLevel(std::string & TileSet, std::string & FileName)
+int Level::LoadLevel(std::string & DataFile)
 {
 
+
+	//Check to see if we have a level loaded already and unload it
 
 
 	//Load Level Layout
@@ -47,38 +49,18 @@ int Level::LoadLevel(std::string & TileSet, std::string & FileName)
 
 	//Open our level settings file
 	std::ifstream Settings;
-	Settings.open(FileName, std::ios::in);
+	Settings.open(DataFile, std::ios::in);
 
-
-
-	for(int y = 0; y < this->Height; y++)
-	{
-		for(int x = 0; x < Width; x++)
-		{
-			if(y % 4 == 0)
-				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(1));
-			else
-				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(0));
-
-			addTile(x, y, tile);
-		}
-	}
-	
-
-
-
-
-	//Load tileset filename from settings file
-
-
+	Settings.close();
 
 
 
 	//Load Tileset for level
 	sf::Image FullSet;
 
-	if(!FullSet.loadFromFile(TileSet))
+	if(!FullSet.loadFromFile("Images/Level1.png"))
 		return 0;
+	
 
 	//Split tileset by tilesize for the image manager
 
@@ -97,6 +79,21 @@ int Level::LoadLevel(std::string & TileSet, std::string & FileName)
 		}
 	}
 
+
+
+	for(int y = 0; y < this->Height; y++)
+	{
+		for(int x = 0; x < Width; x++)
+		{
+			if(y % 4 == 0)
+				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(2));
+			else if (x % 4 == 0)
+				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(3));
+
+			addTile(x, y, tile);
+		}
+	}
+	
 
 	return 1;
 }

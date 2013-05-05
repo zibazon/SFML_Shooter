@@ -21,7 +21,7 @@ public:
 	void addTile(int x, int y, Tile * tile);
 	Tile * getTile(int x, int y);
 
-	int LoadLevel(std::string & TileSet, std::string & FileName);
+	int LoadLevel(std::string & FileName);
 
 	int getWidth();
 	int getHeight();

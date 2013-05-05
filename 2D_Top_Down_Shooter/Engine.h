@@ -20,14 +20,17 @@ public:
 	Engine(sf::RenderWindow * RenderWindow, int TileSize);
 	~Engine();
 
+	void Init();
 
-	void DrawTiles();
+	void Render();
 	void Update();
+
+	void DebugOutput();
 
 	void ToggleGrid();
 	void ToggleEditor();
 
-	void SetLevel(std::string & TileSet, std::string & FileName);
+	void SetLevel(std::string & FileName);
 
 
 private:
@@ -42,8 +45,14 @@ private:
 
 	Camera * CameraView;
 
+	sf::Font * Font;
+
+	bool isInit;
+
 	bool ShowGrid;
 
 	bool isEditing;
+
+	DWORD KeyPressDelay;
 
 };
