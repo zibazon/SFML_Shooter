@@ -26,6 +26,8 @@ public:
 	int getWidth();
 	int getHeight();
 
+	ImageManager * getImageManager();
+
 private:
 
 	//Map Dimensions

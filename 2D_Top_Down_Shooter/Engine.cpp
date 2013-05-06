@@ -17,7 +17,9 @@ Engine::Engine(sf::RenderWindow * RenderWindow, int TileSize)
 
 	this->TileSize = TileSize;
 
-	this->CurrentLevel = new Level(30, 15, TileSize);
+	this->CurrentLevel = new Level(100, 100, TileSize);
+
+	this->FPSCounter = new Cycles();
 
 	this->ShowGrid = false;
 	this->isEditing = false;
@@ -51,37 +53,48 @@ void Engine::Init()
 //Do not Draw from anywhere else!
 void Engine::Render()
 {
+	
+	FPSCounter->Count();
 
-	sf::VertexArray Line(sf::Lines, 2);
+	//Change the view back to the game camera view
+	this->CameraView->Activate();
+
+	/*sf::VertexArray Line(sf::Lines, 2);
 
 	Line[0].color = sf::Color(200, 200, 200, 255);
-	Line[1].color = sf::Color(200, 200, 200, 255);
+	Line[1].color = sf::Color(200, 200, 200, 255);*/
 
-	for(int x = 0; x <= this->CurrentLevel->getWidth(); x++) //Width
+	sf::Sprite curSprite;
+
+	sf::IntRect tileBounds = this->CameraView->getTileBounds(this->TileSize);
+
+	for(int x = 0, TileX = tileBounds.left; x <= tileBounds.width; x++, TileX++) //Width
 	{
-		for(int y = 0; y <= this->CurrentLevel->getHeight(); y++) //Height
+		for(int y = 0, TileY = tileBounds.top; y <= tileBounds.height; y++, TileY++) //Height
 		{
+			/*
+			Line[0].position = sf::Vector2f(TileX * this->TileSize, y * this->TileSize);
+			Line[1].position = sf::Vector2f((this->TileSize * tileBounds.width), y * this->TileSize);//End point
 
-			//Doesn't cover the last row!
-			Line[0].position = sf::Vector2f(0, y * this->TileSize);
-
-			Line[1].position = sf::Vector2f((this->TileSize * this->CurrentLevel->getWidth()), y * this->TileSize);//End point
-
-			if(this->ShowGrid) this->RenderWindow->draw(Line);
-
-
-			Line[0].position = sf::Vector2f(x * this->TileSize, 0);
-
-			Line[1].position = sf::Vector2f(x * this->TileSize, (this->TileSize * this->CurrentLevel->getHeight()));//End point
-
-			if(this->ShowGrid) this->RenderWindow->draw(Line);
+			if(this->ShowGrid) 
+				this->RenderWindow->draw(Line);
 
 
-			//Draw tiles here
-			Tile * curTile = this->CurrentLevel->getTile(x,y);
+			Line[0].position = sf::Vector2f(x * this->TileSize, TileY * this->TileSize);
+			Line[1].position = sf::Vector2f(x * this->TileSize, (this->TileSize * tileBounds.height));//End point
+
+			if(this->ShowGrid) 
+				this->RenderWindow->draw(Line);*/
+
+			Tile * curTile = this->CurrentLevel->getTile(TileX, TileY);
 
 			if(curTile != NULL)
-				curTile->Draw(sf::Vector2f(x * this->TileSize, y * this->TileSize), this->RenderWindow);
+			{
+				curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(curTile->getSpriteID()));
+				curSprite.setPosition(curTile->getPosition());
+				this->RenderWindow->draw(curSprite);
+			}
+
 
 		}
 
@@ -90,7 +103,7 @@ void Engine::Render()
 
 	if(this->isEditing)
 	{
-		this->DebugOutput();
+		this->DebugOutput(tileBounds);
 	}
 
 
@@ -98,31 +111,39 @@ void Engine::Render()
 }
 
 
-void Engine::DebugOutput()
+void Engine::DebugOutput(sf::IntRect tb)
 {
 
+	this->RenderWindow->setView(this->RenderWindow->getDefaultView());
+
+	//All debug text will use this variable
+	sf::Text Txt;
+	Txt.setFont(*this->Font);
+	Txt.setColor(sf::Color::White);
+	Txt.setCharacterSize(12);
+	Txt.setPosition(10, 10);
 
 	//Mouse coordinates
 	//Hovering Tile
 	//Change tiles? thats for the editor to do....
 	//Frames Per Second
 
-	sf::Text Txt;
-	Txt.setFont(*this->Font);
+	
 
-	Txt.setString("Hello World");
+	Txt.setString(std::string("FPS: ") + NumberToString(FPSCounter->GetCount()));
 
-	Txt.setColor(sf::Color::White);
-
-	Txt.setCharacterSize(12);
-
-	Txt.setPosition(this->CameraView->getPosition());
+	
 
 
+	//Change the view for the GUI
+	
 	this->RenderWindow->draw(Txt);
 
 
-
+	Txt.setPosition(10, 30);
+	Txt.setString(std::string("Left: ") + NumberToString(tb.left) + std::string("\n") + std::string("Top: ") + NumberToString(tb.top) + std::string("\n") +
+		std::string("Width: ") + NumberToString(tb.width) + std::string("\n") + std::string("Height: ") + NumberToString(tb.height));
+	this->RenderWindow->draw(Txt);
 }
 
 
@@ -149,6 +170,27 @@ void Engine::Update()
 
 		//view of tileset
 
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		{
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x, this->CameraView->getCenter().y - 10) );
+		}
+
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x, this->CameraView->getCenter().y + 10) );
+		}
+
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x - 10, this->CameraView->getCenter().y) );
+		}
+
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x + 10, this->CameraView->getCenter().y) );
+		}
+
+
 	}else{
 
 		//Normal game play
@@ -167,4 +209,11 @@ void Engine::ToggleGrid()
 void Engine::SetLevel(std::string & FileName)
 {
 	this->CurrentLevel->LoadLevel(FileName);
+}
+
+std::string Engine::NumberToString(int Number)
+{
+    std::ostringstream ss;
+    ss << Number;
+    return ss.str();
 }

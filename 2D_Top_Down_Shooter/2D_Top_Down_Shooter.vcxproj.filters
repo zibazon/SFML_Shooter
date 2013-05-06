@@ -23,11 +23,14 @@
     <Filter Include="Game Objects">
       <UniqueIdentifier>{069bbb78-27d0-46f6-935b-d5d309cd6bb9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Objects\Tile">
-      <UniqueIdentifier>{3889f51b-160e-4802-af09-27462e4e5c26}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Image Manager">
       <UniqueIdentifier>{04db4b42-5190-43eb-9ded-0a6aeab1a332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{46f622b7-cb32-4a03-9791-e075f08512f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tiling Engine\Tile">
+      <UniqueIdentifier>{3889f51b-160e-4802-af09-27462e4e5c26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +44,7 @@
       <Filter>Tiling Engine\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Game Objects\Tile</Filter>
+      <Filter>Tiling Engine\Tile</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Game Objects</Filter>
@@ -55,6 +58,9 @@
     <ClCompile Include="ImageManager.cpp">
       <Filter>Image Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Cycles.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -67,7 +73,7 @@
       <Filter>Tiling Engine\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Game Objects\Tile</Filter>
+      <Filter>Tiling Engine\Tile</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Game Objects</Filter>
@@ -80,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="ImageManager.h">
       <Filter>Image Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Cycles.h">
+      <Filter>Debug</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

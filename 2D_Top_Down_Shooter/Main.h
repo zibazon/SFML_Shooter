@@ -55,7 +55,7 @@ namespace Game
 		GameEngine = new Engine(MainWindow, 32);
 
 		GameEngine->SetLevel(std::string("Images/Level1.png"));
-		GameEngine->ToggleGrid();
+		//GameEngine->ToggleGrid();
 
 	}
 

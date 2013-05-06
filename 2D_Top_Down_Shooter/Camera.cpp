@@ -38,9 +38,35 @@ void Camera::Move(sf::Vector2f Coords)
 	this->CameraView->setCenter(Coords);
 }
 
-sf::Vector2f Camera::getPosition()
+sf::Vector2f Camera::getCenter()
 {
 
 	//not right....
-	return sf::Vector2f(this->CameraView->getViewport().left, this->CameraView->getViewport().top);
+	return sf::Vector2f(this->CameraView->getCenter().x, this->CameraView->getCenter().y);
+}
+
+
+sf::IntRect Camera::getTileBounds(int tileSize)
+{
+	int x = (int)((this->CameraView->getCenter().x - (this->CameraView->getSize().x / 2)) / tileSize);
+	int y = (int)((this->CameraView->getCenter().y - (this->CameraView->getSize().y / 2)) / tileSize);
+
+	//+1 in case camera size isn't divisible by tileSize
+	//And +1 again because these values start at 0, and
+	//we want them to start at one
+	int w = (int)(this->CameraView->getSize().x / tileSize + 2);
+	int h = (int)(this->CameraView->getSize().y / tileSize + 2);
+
+	//And +1 again if we're offset from the tile
+	if(x % tileSize != 0)
+		w++;
+	if(y % tileSize != 0)
+		h++;
+
+	if(x < 0)
+		x = 0;
+	if(y < 0)
+		y = 0;
+
+	return sf::IntRect(x, y, w, h);
 }

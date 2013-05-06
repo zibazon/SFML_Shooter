@@ -27,7 +27,10 @@ public:
 	void Update();
 
 
-	sf::Vector2f getPosition();
+	sf::Vector2f getCenter();
+
+	sf::IntRect getTileBounds(int tileSize);
+
 
 private:
 

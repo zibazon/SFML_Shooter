@@ -1,12 +1,25 @@
-﻿Build started 5/4/2013 11:37:58 PM.
+﻿Build started 5/5/2013 11:44:09 PM.
      1>Project "C:\Users\Sean\Documents\GitHub\SFML_Shooter\2D_Top_Down_Shooter\2D_Top_Down_Shooter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\2D_Top_Down_Shooter.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Sean\Documents\Visual Studio 2010\SFML-2.0_x86\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp
-         Camera.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Sean\Documents\Visual Studio 2010\SFML-2.0_x86\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Engine.cpp Level.cpp
+         Level.cpp
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(24): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(25): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(31): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(32): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(91): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(91): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(93): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\level.cpp(93): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Engine.cpp
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\engine.cpp(16): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>c:\users\sean\documents\github\sfml_shooter\2d_top_down_shooter\engine.cpp(16): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\Game.exe" /NOLOGO /LIBPATH:"C:\Users\Sean\Documents\Visual Studio 2010\SFML-2.0_x86\lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" "sfml-graphics-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Game.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\Game.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sean\Documents\GitHub\SFML_Shooter\Debug\Game.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\Cycles.obj
          Debug\GameObject.obj
          Debug\Level.obj
          Debug\Main.obj
@@ -68,4 +81,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.17
+Time Elapsed 00:00:03.16

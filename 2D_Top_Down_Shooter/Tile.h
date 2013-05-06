@@ -10,22 +10,29 @@
 
 
 
-class Tile : public GameObject
+class Tile
 {
 
 public:
 
-	Tile(sf::Vector2f Position, sf::Texture * Texture);
+	Tile(sf::Vector2f Position, int SpriteID);
 	~Tile();
 
-	void Draw(sf::Vector2f Position, sf::RenderWindow * RenderWindow);
+	int getSpriteID();
+	void setSpriteID(int SpriteID);
 
-	void SetMovementCost(float Cost);
-	float GetMovementCost();
+	sf::Vector2f getPosition();
+
+	void setMovementCost(float Cost);
+	float getMovementCost();
 
 
 private:
 
+	int SpriteID; //Defines the texture used to draw this tile
+
+	sf::Vector2f Position;
+	
 	float Cost; //Used for AI path finding
 
 };

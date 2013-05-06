@@ -85,10 +85,12 @@ int Level::LoadLevel(std::string & DataFile)
 	{
 		for(int x = 0; x < Width; x++)
 		{
+
+			//How about we actually load the tile map, hmm?
 			if(y % 4 == 0)
-				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(2));
-			else if (x % 4 == 0)
-				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), this->TileSet->GetTexture(3));
+				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), 2);
+			else
+				tile = new Tile(sf::Vector2f(x * this->TileSize, y * TileSize), 3);
 
 			addTile(x, y, tile);
 		}
@@ -121,4 +123,9 @@ void Level::setDimensions(int Width, int Height)
 		Map.at(i).resize(Height, 0);
 	}
 
+}
+
+ImageManager * Level::getImageManager()
+{
+	return this->TileSet;
 }
