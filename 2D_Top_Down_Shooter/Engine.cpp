@@ -90,7 +90,10 @@ void Engine::Render()
 			{
 				curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(curTile->getSpriteID()));
 				curSprite.setPosition(curTile->getPosition());
-				this->RenderWindow->draw(curSprite);
+
+				//Why should we draw if there is no texture?
+				if(curSprite.getTexture() != NULL)
+					this->RenderWindow->draw(curSprite);
 			}
 
 

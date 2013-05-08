@@ -19,5 +19,9 @@ void ImageManager::AddTexture(sf::Texture * texture)
 
 sf::Texture * ImageManager::GetTexture(int index)
 {
-	return this->Images[index];
+	//Prevent walking off the end of the vector
+	if(index < this->Images.size())
+		return this->Images[index];
+	else
+		return NULL;
 }
