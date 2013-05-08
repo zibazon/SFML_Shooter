@@ -19,7 +19,7 @@ class Engine
 
 public:
 
-	Engine(sf::RenderWindow * RenderWindow, int TileSize);
+	Engine(sf::RenderWindow * RenderWindow);
 	~Engine();
 
 	void Init();
@@ -44,8 +44,6 @@ private:
 	sf::Image * TileImageSet;
 
 	Cycles * FPSCounter;
-
-	int TileSize;
 
 	Level * CurrentLevel;
 

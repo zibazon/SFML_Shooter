@@ -79,7 +79,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
                 Game::MainWindow->close();
         }
 
-        Game::MainWindow->clear();		//Clear the frame buffer
+        Game::MainWindow->clear(sf::Color(130, 130, 130, 255));		//Clear the frame buffer
 
 		switch(Game::CurGameState)
 		{

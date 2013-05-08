@@ -52,9 +52,9 @@ namespace Game
 
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)UpdateThread, NULL, NULL, NULL);
 
-		GameEngine = new Engine(MainWindow, 32);
+		GameEngine = new Engine(MainWindow);
 
-		GameEngine->SetLevel(std::string("Images/Level1.png"));
+		GameEngine->SetLevel(std::string("Data/Level1.txt"));
 		//GameEngine->ToggleGrid();
 
 	}

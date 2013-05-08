@@ -15,16 +15,19 @@ class Level
 {
 
 public:
-	Level(int Width, int Height, int TileSize);
+	Level();
+	//Level(std::string &FileName); //Add later
 	~Level();
 	
 	void addTile(int x, int y, Tile * tile);
 	Tile * getTile(int x, int y);
 
 	int LoadLevel(std::string & FileName);
+	void SaveLevel();
 
 	int getWidth();
 	int getHeight();
+	int getTileSize();
 
 	ImageManager * getImageManager();
 
@@ -36,6 +39,9 @@ private:
 	int Height;
 
 	int TileSize;
+
+	//Location on disk of tile set image file, relative to game exe file
+	char tileSetImage[256];
 
 	std::vector<std::vector<Tile*>> Map;
 

@@ -6,7 +6,7 @@
 #include "Engine.h"
 
 
-Engine::Engine(sf::RenderWindow * RenderWindow, int TileSize)
+Engine::Engine(sf::RenderWindow * RenderWindow)
 {
 
 	//Copy of our render window, maybe we shouldn't be copying? eh who cares...
@@ -15,9 +15,7 @@ Engine::Engine(sf::RenderWindow * RenderWindow, int TileSize)
 	//Setup camera and viewport
 	this->CameraView = new Camera(sf::Vector2f(this->RenderWindow->getSize().x /2 - 100, this->RenderWindow->getSize().y /2 - 100), RenderWindow);
 
-	this->TileSize = TileSize;
-
-	this->CurrentLevel = new Level(100, 100, TileSize);
+	this->CurrentLevel = new Level();
 
 	this->FPSCounter = new Cycles();
 
@@ -66,7 +64,7 @@ void Engine::Render()
 
 	sf::Sprite curSprite;
 
-	sf::IntRect tileBounds = this->CameraView->getTileBounds(this->TileSize);
+	sf::IntRect tileBounds = this->CameraView->getTileBounds(this->CurrentLevel->getTileSize());
 
 	for(int x = 0, TileX = tileBounds.left; x <= tileBounds.width; x++, TileX++) //Width
 	{
