@@ -27,7 +27,7 @@ public:
 	void Render();
 	void Update();
 
-	void DebugOutput(sf::IntRect tb);
+	void DebugOutput();
 
 	void ToggleGrid();
 	void ToggleEditor();
@@ -35,6 +35,8 @@ public:
 	void SetLevel(std::string & FileName);
 
 	std::string NumberToString(int Number);
+
+	void mouseWheelInc(int Num);
 
 
 private:
@@ -51,12 +53,16 @@ private:
 
 	sf::Font * Font;
 
+	sf::Text * DebugText;
+
 	bool isInit;
 
 	bool ShowGrid;
 
 	bool isEditing;
 
-	DWORD KeyPressDelay;
+	int MouseSpriteID;
+
+	DWORD KeyPressDelay[3];
 
 };

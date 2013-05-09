@@ -5,16 +5,12 @@
 
 Camera::Camera(sf::Vector2f CenterCoords, sf::RenderWindow * RenderWindow)
 {
-
 	this->RenderWindow = RenderWindow;
 
 	//Setup the camera CHANGE THIS
 	this->CameraView = new sf::View( 
 		CenterCoords, /* This will be the coords of object that the view will center around */
 		sf::Vector2f(this->RenderWindow->getSize()));
-
-
-
 }
 
 Camera::~Camera()
@@ -26,6 +22,11 @@ void Camera::Activate()
 {
 	//Activate the camera view
 	this->RenderWindow->setView(*this->CameraView);
+}
+
+sf::View * Camera::getView()
+{
+	return this->CameraView;
 }
 
 void Camera::Pan(sf::Vector2f Coords)

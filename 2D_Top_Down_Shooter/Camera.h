@@ -16,6 +16,7 @@ public:
 	~Camera();
 
 	void Activate();
+	sf::View * getView();
 
 	//Scroll center view to coordinates
 	void Pan(sf::Vector2f Coords);

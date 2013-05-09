@@ -22,6 +22,9 @@ Engine::Engine(sf::RenderWindow * RenderWindow)
 	this->ShowGrid = false;
 	this->isEditing = false;
 	this->isInit = false;
+	this->MouseSpriteID = 0;
+
+	this->DebugText = new sf::Text;
 
 }
 
@@ -39,10 +42,13 @@ void Engine::Init()
 	this->Font = new sf::Font();
 	this->Font->loadFromFile("Arial.ttf");
 
+	this->DebugText->setCharacterSize(12);
+	this->DebugText->setFont(*this->Font);
+	this->DebugText->setColor(sf::Color::White);
 
 	this->CameraView->Activate();
 
-	this->KeyPressDelay = GetTickCount();
+	this->KeyPressDelay[0] = this->KeyPressDelay[1] = GetTickCount();
 
 	this->isInit = true;
 }
@@ -70,13 +76,15 @@ void Engine::Render()
 	{
 		for(int y = 0, TileY = tileBounds.top; y <= tileBounds.height; y++, TileY++) //Height
 		{
+
 			/*
+			//Come up with a better way to do gridding
+
 			Line[0].position = sf::Vector2f(TileX * this->TileSize, y * this->TileSize);
 			Line[1].position = sf::Vector2f((this->TileSize * tileBounds.width), y * this->TileSize);//End point
 
 			if(this->ShowGrid) 
 				this->RenderWindow->draw(Line);
-
 
 			Line[0].position = sf::Vector2f(x * this->TileSize, TileY * this->TileSize);
 			Line[1].position = sf::Vector2f(x * this->TileSize, (this->TileSize * tileBounds.height));//End point
@@ -84,67 +92,120 @@ void Engine::Render()
 			if(this->ShowGrid) 
 				this->RenderWindow->draw(Line);*/
 
+			if(this->isEditing)
+			{
+				sf::Vector2f MousePos = this->RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*this->RenderWindow), *this->CameraView->getView());
+
+				int tSize = this->CurrentLevel->getTileSize(); //Store out tile size for quick reference
+				sf::IntRect tBounds = sf::IntRect(TileX * tSize, TileY * tSize, tSize, tSize);
+
+
+				//Are we hovering over the current tile?
+				if(tBounds.contains(sf::Vector2i(MousePos)))
+				{
+					//Draw editing tile instead!
+					if(this->MouseSpriteID < this->CurrentLevel->getImageManager()->getImagesCount()) 
+						curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(this->MouseSpriteID));//Wut? Doesn't work here without checking
+					else
+						continue;
+
+					curSprite.setPosition(sf::Vector2f(TileX * tSize, TileY * tSize));
+
+					if(curSprite.getTexture() != NULL)
+						this->RenderWindow->draw(curSprite);
+
+					continue;
+				}
+			}
+
+
 			Tile * curTile = this->CurrentLevel->getTile(TileX, TileY);
 
 			if(curTile != NULL)
 			{
-				curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(curTile->getSpriteID()));
+				if(curTile->getSpriteID() < this->CurrentLevel->getImageManager()->getImagesCount()) 
+					curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(curTile->getSpriteID())); //Works here no problemo
+				else
+					continue;
+
 				curSprite.setPosition(curTile->getPosition());
 
 				//Why should we draw if there is no texture?
 				if(curSprite.getTexture() != NULL)
 					this->RenderWindow->draw(curSprite);
 			}
-
-
 		}
-
 	}
 
 
 	if(this->isEditing)
 	{
-		this->DebugOutput(tileBounds);
+		this->DebugOutput();
 	}
 
+	this->RenderWindow->setView(this->RenderWindow->getDefaultView());
+
+	this->DebugText->setPosition(10, 10);
+	this->DebugText->setString(std::string("FPS: ") + NumberToString(FPSCounter->GetCount()));
+	this->RenderWindow->draw(*DebugText);
 
 
 }
 
 
-void Engine::DebugOutput(sf::IntRect tb)
+void Engine::DebugOutput()
 {
-
+	//Change to the default view
 	this->RenderWindow->setView(this->RenderWindow->getDefaultView());
 
 	//All debug text will use this variable
-	sf::Text Txt;
-	Txt.setFont(*this->Font);
-	Txt.setColor(sf::Color::White);
-	Txt.setCharacterSize(12);
-	Txt.setPosition(10, 10);
 
-	//Mouse coordinates
-	//Hovering Tile
+
+	//Mouse coordinates and Current Tile coords
+	
 	//Change tiles? thats for the editor to do....
-	//Frames Per Second
 
 	
+	//FPS
+	//Txt.setString(std::string("FPS: ") + NumberToString(FPSCounter->GetCount()));
+	//this->RenderWindow->draw(Txt);
 
-	Txt.setString(std::string("FPS: ") + NumberToString(FPSCounter->GetCount()));
+	sf::Vector2f MousePos = this->RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*this->RenderWindow), *this->CameraView->getView());
 
-	
+	this->DebugText->setPosition(10, 30);
+	this->DebugText->setString(std::string("MouseX: ") + NumberToString(MousePos.x) + std::string("\n") + std::string("MouseY: ") + NumberToString(MousePos.y) + std::string("\n"));
+	this->RenderWindow->draw(*this->DebugText);
+
+	this->DebugText->setPosition(10, 70);
+	this->DebugText->setString(std::string("HoverX: ") + NumberToString(MousePos.x/32) + std::string("\n") + std::string("HoverY: ") + NumberToString(MousePos.y/32) + std::string("\n"));
+	this->RenderWindow->draw(*this->DebugText);
+
+	this->DebugText->setPosition(10, 100);
+	this->DebugText->setString(std::string("Mouse Wheel ID: ") + NumberToString(this->MouseSpriteID));
+	this->RenderWindow->draw(*this->DebugText);
+
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		Tile * curTile = this->CurrentLevel->getTile(MousePos.x / 32, MousePos.y / 32);
+
+		if(curTile)
+		{
+			curTile->setSpriteID(this->MouseSpriteID);
+		}
+	}
+
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	{
+		Tile * curTile = this->CurrentLevel->getTile(MousePos.x / 32, MousePos.y / 32);
+
+		if(curTile)
+		{
+			this->MouseSpriteID = curTile->getSpriteID();
+		}
+	}
 
 
-	//Change the view for the GUI
-	
-	this->RenderWindow->draw(Txt);
 
-
-	Txt.setPosition(10, 30);
-	Txt.setString(std::string("Left: ") + NumberToString(tb.left) + std::string("\n") + std::string("Top: ") + NumberToString(tb.top) + std::string("\n") +
-		std::string("Width: ") + NumberToString(tb.width) + std::string("\n") + std::string("Height: ") + NumberToString(tb.height));
-	this->RenderWindow->draw(Txt);
 }
 
 
@@ -154,15 +215,25 @@ void Engine::Update()
 
 
 	//Toggle edit mode
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E) && this->KeyPressDelay < GetTickCount())
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && this->KeyPressDelay[0] < GetTickCount())
 	{
 		this->isEditing = !this->isEditing;
-		this->KeyPressDelay = GetTickCount() + 200;
+		this->KeyPressDelay[0] = GetTickCount() + 200;
 	}
 
 
+	
+
 	if(this->isEditing)
 	{
+
+		//Save Current Tile Map with the F2 Key
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::F2) && this->KeyPressDelay[1] < GetTickCount())
+		{
+			this->CurrentLevel->SaveLevel();
+			this->KeyPressDelay[1] = GetTickCount() + 500;
+		}
+
 		//Editing mode!
 
 		//allow dynamic changing of tiles
@@ -217,4 +288,17 @@ std::string Engine::NumberToString(int Number)
     std::ostringstream ss;
     ss << Number;
     return ss.str();
+}
+
+void Engine::mouseWheelInc(int Num)
+{
+	int MaxImages = this->CurrentLevel->getImageManager()->getImagesCount();
+
+	this->MouseSpriteID += Num;
+
+	if(this->MouseSpriteID < 0)
+		this->MouseSpriteID = MaxImages;
+
+	if(this->MouseSpriteID > MaxImages)
+		this->MouseSpriteID = 0;
 }

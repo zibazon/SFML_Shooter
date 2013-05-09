@@ -77,6 +77,9 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpCmdLine, int nC
         {
             if (event.type == sf::Event::Closed)
                 Game::MainWindow->close();
+
+			if(event.type == sf::Event::MouseWheelMoved)
+				Game::GameEngine->mouseWheelInc(event.mouseWheel.delta);
         }
 
         Game::MainWindow->clear(sf::Color(130, 130, 130, 255));		//Clear the frame buffer

@@ -7,6 +7,7 @@ Tile::Tile(sf::Vector2f Position, int SpriteID)
 {
 	this->Position = Position;
 	this->SpriteID = SpriteID;
+	this->Cost = 0;
 }
 
 Tile::~Tile()

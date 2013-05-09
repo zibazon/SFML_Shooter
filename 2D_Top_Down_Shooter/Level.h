@@ -43,6 +43,8 @@ private:
 	//Location on disk of tile set image file, relative to game exe file
 	char tileSetImage[256];
 
+	std::string levelDataFile;
+
 	std::vector<std::vector<Tile*>> Map;
 
 	void setDimensions(int Width, int Height);

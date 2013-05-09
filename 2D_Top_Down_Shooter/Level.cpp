@@ -40,21 +40,22 @@ int Level::LoadLevel(std::string & DataFile)
 
 	//Check to see if we have a level loaded already and unload it
 
+	this->levelDataFile = DataFile;
 
 	//Load Level Layout
 	Tile * tile;
 
 	//Open our level settings file
-	std::ifstream Settings;
-	Settings.open(DataFile, std::ios::in);
+	std::ifstream Data;
+	Data.open(DataFile, std::ios::in);
 
 	//Line 1, Width
-	Settings.getline(tmp, 256);
+	Data.getline(tmp, 256);
 	this->Width = atoi(tmp);
 	ZeroMemory(tmp, sizeof(tmp));
 
 	//Line 2, Height
-	Settings.getline(tmp, 256);
+	Data.getline(tmp, 256);
 	this->Height = atoi(tmp);
 	ZeroMemory(tmp, sizeof(tmp));
 
@@ -62,12 +63,12 @@ int Level::LoadLevel(std::string & DataFile)
 	this->setDimensions(Width, Height);
 
 	//Line 3, TileSize
-	Settings.getline(tmp, 256);
+	Data.getline(tmp, 256);
 	this->TileSize = atoi(tmp);
 	ZeroMemory(tmp, sizeof(tmp));
 
 	//Line 4, Tile set image file relative location
-	Settings.getline(this->tileSetImage, 256);
+	Data.getline(this->tileSetImage, 256);
 
 	//Load Tileset for level
 	sf::Image FullSet;
@@ -109,18 +110,18 @@ int Level::LoadLevel(std::string & DataFile)
 
 			//Load from file
 			ZeroMemory(tmp, sizeof(tmp));
-			Settings.getline(tmp, 256, ',');
+			Data.getline(tmp, 256, ',');
 			curTileID = atoi(tmp);
 
 
 			tile = new Tile(sf::Vector2f(x * this->TileSize, y * this->TileSize), curTileID);
 
 
-			addTile(x, y, tile);
+			this->addTile(x, y, tile);
 		}
 	}
 	
-	Settings.close(); //Close our settings file
+	Data.close(); //Close our settings file
 
 
 	return 1;
@@ -129,8 +130,29 @@ int Level::LoadLevel(std::string & DataFile)
 void Level::SaveLevel() 
 {
 	//Save the current level to the disk
+	std::ofstream Data;
+	Data.open(this->levelDataFile, std::ios::out);
 
+	Data << this->Width << std::endl;
+	Data << this->Height << std::endl;
+	Data << this->TileSize << std::endl;
+	Data << this->tileSetImage << std::endl;
 
+	for(int y = 0; y < this->Height; y++)
+	{
+		for(int x = 0; x < this->Width; x++)
+		{
+
+			Tile * curTile = this->getTile(x, y);
+
+			Data << curTile->getSpriteID() << ",";
+
+		}
+
+		Data << std::endl;
+	}
+
+	Data.close();
 
 }
 

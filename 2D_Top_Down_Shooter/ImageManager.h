@@ -15,6 +15,8 @@ public:
 	void AddTexture(sf::Texture * Texture);
 	sf::Texture * GetTexture(int Index);
 
+	int getImagesCount();
+
 private:
 
 	std::vector<sf::Texture*> Images;
