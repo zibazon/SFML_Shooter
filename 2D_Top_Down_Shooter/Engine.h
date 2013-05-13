@@ -25,7 +25,7 @@ public:
 	void Init();
 
 	void Render();
-	void Update();
+	void Update(float deltaTime);
 
 	void DebugOutput();
 
@@ -35,6 +35,7 @@ public:
 	void SetLevel(std::string & FileName);
 
 	std::string NumberToString(int Number);
+	std::string FloatToString(float Number);
 
 	void mouseWheelInc(int Num);
 
@@ -60,6 +61,8 @@ private:
 	bool ShowGrid;
 
 	bool isEditing;
+
+	int DrawCalls;
 
 	int MouseSpriteID;
 

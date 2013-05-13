@@ -23,6 +23,7 @@ Engine::Engine(sf::RenderWindow * RenderWindow)
 	this->isEditing = false;
 	this->isInit = false;
 	this->MouseSpriteID = 0;
+	this->DrawCalls = 0;
 
 	this->DebugText = new sf::Text;
 
@@ -51,13 +52,14 @@ void Engine::Init()
 	this->KeyPressDelay[0] = this->KeyPressDelay[1] = GetTickCount();
 
 	this->isInit = true;
+
 }
 
 //All of the rendering is done in this function
 //Do not Draw from anywhere else!
 void Engine::Render()
 {
-	
+	this->DrawCalls = 0;
 	FPSCounter->Count();
 
 	//Change the view back to the game camera view
@@ -70,83 +72,68 @@ void Engine::Render()
 
 	sf::Sprite curSprite;
 
+	int numOfImages = this->CurrentLevel->getImageManager()->getImagesCount();
+
+	int tSize = this->CurrentLevel->getTileSize(); //Store out tile size for quick reference
+
 	sf::IntRect tileBounds = this->CameraView->getTileBounds(this->CurrentLevel->getTileSize());
+
+	sf::Vector2f MousePos = this->RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*this->RenderWindow));
+
 
 	for(int x = 0, TileX = tileBounds.left; x <= tileBounds.width; x++, TileX++) //Width
 	{
 		for(int y = 0, TileY = tileBounds.top; y <= tileBounds.height; y++, TileY++) //Height
 		{
 
-			/*
-			//Come up with a better way to do gridding
-
-			Line[0].position = sf::Vector2f(TileX * this->TileSize, y * this->TileSize);
-			Line[1].position = sf::Vector2f((this->TileSize * tileBounds.width), y * this->TileSize);//End point
-
-			if(this->ShowGrid) 
-				this->RenderWindow->draw(Line);
-
-			Line[0].position = sf::Vector2f(x * this->TileSize, TileY * this->TileSize);
-			Line[1].position = sf::Vector2f(x * this->TileSize, (this->TileSize * tileBounds.height));//End point
-
-			if(this->ShowGrid) 
-				this->RenderWindow->draw(Line);*/
-
-			if(this->isEditing)
-			{
-				sf::Vector2f MousePos = this->RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*this->RenderWindow), *this->CameraView->getView());
-
-				int tSize = this->CurrentLevel->getTileSize(); //Store out tile size for quick reference
-				sf::IntRect tBounds = sf::IntRect(TileX * tSize, TileY * tSize, tSize, tSize);
-
-
-				//Are we hovering over the current tile?
-				if(tBounds.contains(sf::Vector2i(MousePos)))
-				{
-					//Draw editing tile instead!
-					if(this->MouseSpriteID < this->CurrentLevel->getImageManager()->getImagesCount()) 
-						curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(this->MouseSpriteID));//Wut? Doesn't work here without checking
-					else
-						continue;
-
-					curSprite.setPosition(sf::Vector2f(TileX * tSize, TileY * tSize));
-
-					if(curSprite.getTexture() != NULL)
-						this->RenderWindow->draw(curSprite);
-
-					continue;
-				}
-			}
-
-
 			Tile * curTile = this->CurrentLevel->getTile(TileX, TileY);
 
 			if(curTile != NULL)
 			{
 				if(curTile->getSpriteID() < this->CurrentLevel->getImageManager()->getImagesCount()) 
+				{
 					curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(curTile->getSpriteID())); //Works here no problemo
-				else
-					continue;
+				
+					curSprite.setPosition(curTile->getPosition());
 
-				curSprite.setPosition(curTile->getPosition());
-
-				//Why should we draw if there is no texture?
-				if(curSprite.getTexture() != NULL)
-					this->RenderWindow->draw(curSprite);
+					//Why should we draw if there is no texture?
+					if(curSprite.getTexture() != NULL)
+					{
+						this->RenderWindow->draw(curSprite);
+						this->DrawCalls++;
+					}
+				}
 			}
+
+
 		}
 	}
 
 
 	if(this->isEditing)
 	{
+		//Draw our editing tile on mouse position
+
+		if(this->MouseSpriteID < numOfImages)
+		{
+			curSprite.setTexture(*this->CurrentLevel->getImageManager()->GetTexture(this->MouseSpriteID));
+					
+			curSprite.setPosition(sf::Vector2f(MousePos.x - (tSize/2), MousePos.y - (tSize/2)));
+
+			if(curSprite.getTexture() != NULL)
+			{
+				this->RenderWindow->draw(curSprite);
+				this->DrawCalls++;
+			}
+		}
+
 		this->DebugOutput();
 	}
 
 	this->RenderWindow->setView(this->RenderWindow->getDefaultView());
 
 	this->DebugText->setPosition(10, 10);
-	this->DebugText->setString(std::string("FPS: ") + NumberToString(FPSCounter->GetCount()));
+	this->DebugText->setString(std::string("FPS: ") + NumberToString(FPSCounter->GetCount()) +  std::string("   Draw Calls: ") + NumberToString(this->DrawCalls));
 	this->RenderWindow->draw(*DebugText);
 
 
@@ -184,35 +171,13 @@ void Engine::DebugOutput()
 	this->DebugText->setString(std::string("Mouse Wheel ID: ") + NumberToString(this->MouseSpriteID));
 	this->RenderWindow->draw(*this->DebugText);
 
-	if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		Tile * curTile = this->CurrentLevel->getTile(MousePos.x / 32, MousePos.y / 32);
-
-		if(curTile)
-		{
-			curTile->setSpriteID(this->MouseSpriteID);
-		}
-	}
-
-	if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
-	{
-		Tile * curTile = this->CurrentLevel->getTile(MousePos.x / 32, MousePos.y / 32);
-
-		if(curTile)
-		{
-			this->MouseSpriteID = curTile->getSpriteID();
-		}
-	}
-
-
-
 }
 
 
 
-void Engine::Update()
+void Engine::Update(float deltaTime)
 {
-
+	sf::Vector2f MousePos = this->RenderWindow->mapPixelToCoords(sf::Mouse::getPosition(*this->RenderWindow), *this->CameraView->getView());
 
 	//Toggle edit mode
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && this->KeyPressDelay[0] < GetTickCount())
@@ -244,23 +209,45 @@ void Engine::Update()
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x, this->CameraView->getCenter().y - 10) );
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x, this->CameraView->getCenter().y - (10 * deltaTime)) );
 		}
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x, this->CameraView->getCenter().y + 10) );
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x, this->CameraView->getCenter().y + (10 * deltaTime)) );
 		}
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x - 10, this->CameraView->getCenter().y) );
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x - (10 * deltaTime), this->CameraView->getCenter().y) );
 		}
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x + 10, this->CameraView->getCenter().y) );
+			this->CameraView->Move( sf::Vector2f(this->CameraView->getCenter().x + (10 * deltaTime), this->CameraView->getCenter().y) );
 		}
+
+
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			Tile * curTile = this->CurrentLevel->getTile(MousePos.x / 32, MousePos.y / 32);
+
+			if(curTile)
+			{
+				curTile->setSpriteID(this->MouseSpriteID);
+			}
+		}
+
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		{
+			Tile * curTile = this->CurrentLevel->getTile(MousePos.x / 32, MousePos.y / 32);
+
+			if(curTile)
+			{
+				this->MouseSpriteID = curTile->getSpriteID();
+			}
+		}
+
 
 
 	}else{
@@ -284,6 +271,13 @@ void Engine::SetLevel(std::string & FileName)
 }
 
 std::string Engine::NumberToString(int Number)
+{
+    std::ostringstream ss;
+    ss << Number;
+    return ss.str();
+}
+
+std::string Engine::FloatToString(float Number)
 {
     std::ostringstream ss;
     ss << Number;

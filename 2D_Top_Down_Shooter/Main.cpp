@@ -48,7 +48,7 @@ void Game::UpdateThread()
 
 			
 			//Update the game engine
-			Game::GameEngine->Update();
+			Game::GameEngine->Update(TickTime.asSeconds() * 60);
 
 			break;
 
@@ -56,9 +56,9 @@ void Game::UpdateThread()
 
 
 		
-		do{			// We only want 60 updates every second
+		//do{	// We only want 60 updates every second
 			TickTime = Ticks.getElapsedTime();
-		}while(TickTime.asMilliseconds() < 16.5);
+		//}while(TickTime.asMilliseconds() < 16.5);
 
 	}
 

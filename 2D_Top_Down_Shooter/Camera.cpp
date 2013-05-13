@@ -64,10 +64,5 @@ sf::IntRect Camera::getTileBounds(int tileSize)
 	if(y % tileSize != 0)
 		h++;
 
-	if(x < 0)
-		x = 0;
-	if(y < 0)
-		y = 0;
-
 	return sf::IntRect(x, y, w, h);
 }
